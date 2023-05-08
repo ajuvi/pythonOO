@@ -6,6 +6,7 @@ class Complexe:
     
     #contructor de la classe
     def __init__(self, real, imaginari):
+        #atributs d'objecte
         self.real = real
         self.imaginari = imaginari
 
@@ -23,10 +24,15 @@ class Complexe:
         return '[' + str(self.real) + ',' + str(self.imaginari) + 'i]'
 
 #main
-com1 = Complexe(2,3)
-com2 = Complexe(1,2)
-com3 = Complexe.suma(com1,com2)
+if __name__ == "__main__":
+    #crear dos objectes
+    com1 = Complexe(2,3)
+    com2 = Complexe(1,2)
 
-print(com1)
-print(com2)
-print(com3)
+    #excutar un mètode de classe
+    com3 = Complexe.suma(com1,com2)
+
+    #printar els objectes, executant de manera implícita el mètode __str__
+    print(com1)
+    print(com2)
+    print(com3)

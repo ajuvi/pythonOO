@@ -1,38 +1,66 @@
+#declaració de la classe Perro
 class Perro():
 
-    def __init__(self, xip=-1):
+    #constructor per defecte de la classe Perro
+    def __init__(self, xip):
         self.xip = xip
 
+    #mètode d'instància
     def ladrar(self):
-        return "Perro Ladrando"
-    
-    def dormir(self):
-        return "Perro Durmiendo"
+        print("Perro Ladrando")
 
+    #mètode d'instància
+    def dormir(self):
+        print("Perro Durmiendo")
+
+    def __str__(self):
+        return f"Perro: {self.xip}"
+
+#herència de la classe Perro
 class Chihuahua(Perro):
-    def ladrar(self):
-        return "Chihuahua Ladrando"
-    
-    def dormir(self):
-        return "Chihuahua Durmiendo"
 
-class Bulldog(Perro):
+    #sobreescriure el mètode ladrar de Perro
     def ladrar(self):
-        return "Bulldog Ladrando"
-    
+        print("Chihuahua Ladrando")
+
+    #sobreescriure el mètode dormir de Perro    
     def dormir(self):
-        return "Bulldog Durmiendo"
+        print("Chihuahua Durmiendo")
+
+#herència de la classe Perro
+class Bulldog(Perro):
+
+    #sobreescriure el mètode ladrar de Perro
+    def ladrar(self):
+        print("Bulldog Ladrando")
+
+    #sobreescriure el mètode dormir de Perro    
+    def dormir(self):
+        print("Bulldog Durmiendo")
+
+    def __str__(self):
+        return f"Bulldog: {self.xip}"
 
 #main
-gos1 = Perro()
-gos2 = Chihuahua()
-gos3 = Bulldog()
+if __name__ == "__main__":
+    
+    #crear tres Perro
+    gos1 = Perro(20)
+    gos2 = Chihuahua(30)
+    gos3 = Bulldog(40)
 
-print(gos1.ladrar())
-print(gos2.ladrar())
-print(gos3.ladrar())
+    #afegir el objectes en un array de Perro
+    gossos = [gos1,gos2,gos3]
 
-print(gos1.dormir())
-print(gos2.dormir())
-print(gos3.dormir())
+    #lladrar a tots els gossos
+    for gos in gossos:
+        gos.ladrar()
 
+    #dormir a tots els gossos
+    for gos in gossos:
+        gos.dormir()
+    
+    #mostrar a tots els gossos
+    for gos in gossos:
+        print(gos)
+    
