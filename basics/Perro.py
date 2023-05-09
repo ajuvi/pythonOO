@@ -34,10 +34,6 @@ class Bulldog(Perro):
     def ladrar(self):
         print("Bulldog Ladrando")
 
-    #sobreescriure el mètode dormir de Perro    
-    def dormir(self):
-        print("Bulldog Durmiendo")
-
     def __str__(self):
         return f"Bulldog: {self.xip}"
 
