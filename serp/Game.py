@@ -42,11 +42,11 @@ poma_x=randrange(num_rows)
 poma_y=randrange(num_columns)
 
 #Imatges dels elements
-serp_img = pygame.image.load("imatges/cap.png")
+serp_img = pygame.image.load("./imatges/cap.png")
 serp_img = pygame.transform.scale(serp_img, (tile_width, tile_height))
-poma_img = pygame.image.load("imatges/poma.png")
+poma_img = pygame.image.load("./imatges/poma.png")
 poma_img = pygame.transform.scale(poma_img, (tile_width, tile_height)) 
-cua_img = pygame.image.load("imatges/cua.png")
+cua_img = pygame.image.load("./imatges/cua.png")
 cua_img = pygame.transform.scale(cua_img, (tile_width, tile_height)) 
 
 # Bucle principal
