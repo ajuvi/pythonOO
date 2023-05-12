@@ -1,55 +1,66 @@
 import pygame
 from random import randrange
+from models.Avatar import Avatar
+from models.Poma import Poma
+from Globals import Globals
 
-######################
-# Paràmetres del joc #
-######################
-FPS = 4
-fpsClock = pygame.time.Clock()
-estat="playing"
+#estat del joc
+estat="init"
+
+#puntuació del joc
 punts=0
-
-#dimensions de la finestra
-window_width=800
-window_height=600
-
-#nombre de files i de columnes
-num_rows=40
-num_columns=30
-
-#dimensions de cada tile
-tile_width = window_width/num_rows
-tile_height = window_height/num_columns
 
 # Inicialitzar Pygame
 pygame.init()
+fpsClock = pygame.time.Clock()
 
-# Crear la finestra
-windows = pygame.display.set_mode((window_width, window_height))
+# Crear la finestra (screen) i la zona per a pintar (tauler)
+screen = pygame.display.set_mode((Globals.screen_width, Globals.screen_height))
+tauler = pygame.Surface((Globals.screen_width, Globals.screen_height))
+
+# Text de la finestra
 pygame.display.set_caption("El joc de la serp")
 
 # Configurar la repetición de teclas
 pygame.key.set_repeat(1, 50)
 
-# Propietats de la serp
-serp_x = num_rows//3
-serp_y = num_columns//2
+#Imatges dels elements
+serp_img = pygame.image.load("./imatges/cap.png")
+serp_img = pygame.transform.scale(serp_img, (Globals.tile_width, Globals.tile_height))
+poma_img = pygame.image.load("./imatges/poma.png")
+poma_img = pygame.transform.scale(poma_img, (Globals.tile_width, Globals.tile_height)) 
+cua_img = pygame.image.load("./imatges/cua.png")
+cua_img = pygame.transform.scale(cua_img, (Globals.tile_width, Globals.tile_height)) 
+
+# Propietats de la sep
+serp_x = Globals.grid_rows//3
+serp_y = Globals.grid_columns//2
 serp_direccio = [1,0]
+
+# Propietats de la cua
 serp_cua = [] 
 
 # Propietats de la poma
-poma_x=randrange(num_rows)
-poma_y=randrange(num_columns)
+poma_x=randrange(Globals.grid_rows)
+poma_y=randrange(Globals.grid_columns)
 
-#Imatges dels elements
-serp_img = pygame.image.load("./imatges/cap.png")
-serp_img = pygame.transform.scale(serp_img, (tile_width, tile_height))
-poma_img = pygame.image.load("./imatges/poma.png")
-poma_img = pygame.transform.scale(poma_img, (tile_width, tile_height)) 
-cua_img = pygame.image.load("./imatges/cua.png")
-cua_img = pygame.transform.scale(cua_img, (tile_width, tile_height)) 
+# Pantalla inicial del joc
+font = pygame.font.SysFont(None, 36)
+txtTitol = font.render('Press key to starting', True, (255, 255, 255))
+rect = txtTitol.get_rect(center=screen.get_rect().center)
+screen.fill((0, 0, 0)) 
+screen.blit(txtTitol, rect)
+while estat=="init":
+    for evento in pygame.event.get():
+        if evento.type == pygame.QUIT:
+            pygame.quit()
+            quit()        
+        elif evento.type == pygame.KEYDOWN:
+            estat="playing"
+    pygame.display.flip()
 
-# Bucle principal
+            
+# Bucle principal del joc
 while estat=="playing":
 
     ###################
@@ -80,21 +91,22 @@ while estat=="playing":
 
     # colissió amb la poma
     if poma_x==serp_x and poma_y==serp_y:
-        poma_x=randrange(num_rows)
-        poma_y=randrange(num_columns)
+        #modificar la posció de la poma
+        poma_x=randrange(Globals.grid_rows)
+        poma_y=randrange(Globals.grid_columns)
+        #afegir un tros de cua a la serp
         serp_cua.append([0,0])
+        #en col·lissionar amb la poma incrementar el punts i incrementar la velocitat del joc
         punts=punts+1
-        FPS=FPS+0.25
-
-    # moure serp
-    pos_x = serp_x
-    pos_y = serp_y
+        Globals.FPS=Globals.FPS+Globals.incrFPS
 
     # moure el cap
+    pos_x = serp_x
+    pos_y = serp_y
     serp_x=serp_x+serp_direccio[0]
     serp_y=serp_y+serp_direccio[1]
 
-    # moure el cos
+    # moure la cua
     for num in range(len(serp_cua)-1,-1,-1):
         if num>0:
             serp_cua[num][0]=serp_cua[num-1][0]
@@ -104,21 +116,44 @@ while estat=="playing":
             serp_cua[0][1]=pos_y
 
     # final de joc    
-    if serp_x<0 or serp_x>=num_rows or serp_y<0 or serp_y>=num_columns:
+    if serp_x<0 or serp_x>=Globals.grid_rows or serp_y<0 or serp_y>=Globals.grid_columns:
         estat="end"
 
     ##########
     # render #
     ##########
 
-    windows.fill((255, 255, 255)) 
-    windows.blit(serp_img, (serp_x*tile_width, serp_y*tile_height)) 
-    windows.blit(poma_img, (poma_x*tile_width, poma_y*tile_height)) 
+    #pintar el fons de blanc
+    tauler.fill((255, 255, 255)) 
 
-    print("CUA")
+    #pintar la poma
+    tauler.blit(poma_img, (poma_x*Globals.tile_width, poma_y*Globals.tile_height)) 
+
+    #pintar el cap de la serp
+    tauler.blit(serp_img, (serp_x*Globals.tile_width, serp_y*Globals.tile_height)) 
+
+    #pintar la cua
     for cua in serp_cua:
-        windows.blit(cua_img, (cua[0]*tile_width, cua[1]*tile_height))
+        tauler.blit(cua_img, (cua[0]*Globals.tile_width, cua[1]*Globals.tile_height))
         print(cua)
-        
+
+    # Aplicar el doble buffering        
+    screen.blit(tauler, (0, 0))
+    pygame.display.flip()
     pygame.display.update()
-    fpsClock.tick(FPS)
+    fpsClock.tick(Globals.FPS)
+
+# Pantalla final del joc
+font = pygame.font.SysFont(None, 36)
+txtTitol = font.render(f'Has aconseguit {punts} pomes.', True, (255, 255, 255))
+rect = txtTitol.get_rect(center=screen.get_rect().center)
+screen.fill((0, 0, 0)) 
+screen.blit(txtTitol, rect)
+while estat=="end":
+    for evento in pygame.event.get():
+        if evento.type == pygame.QUIT:
+            pygame.quit()
+            quit()        
+        elif evento.type == pygame.KEYDOWN:
+            estat="exit"
+    pygame.display.flip()
