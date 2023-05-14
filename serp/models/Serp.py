@@ -1,15 +1,16 @@
 from models.Avatar import Avatar
 
 class Serp(Avatar):
-    def __init__(self,x,y,w,h):
+    def __init__(self,x,y,w,h,tile):
         super().__init__(x,y,w,h)
-        super
+        self.tile=tile
     
     def translate(self,x,y):
-        pass
+        self.x=self.x+x;
+        self.y=self.y+y;
 
-    def pintar(self,panell):
-        pass     
+    def pintar(self,tauler):
+        print("pinta")     
 
     def __str__(self):
-        return f"Serp x:{self.x} y:{self.y} w:{self.w} h:{self.y}"
+        return f"Serp x:{self.x} y:{self.y} w:{self.w} h:{self.h}"

@@ -33,6 +33,12 @@ class ViewModel:
         self._loadTile('cua',"./imatges/cua.png")
         self._loadTile('poma',"./imatges/poma.png")
 
+        #crear la serp
+        self.serp=None
+        
+        #crear la poma
+        self.poma=None
+
     def _loadTile(self,key,url):
         print(url)
         img = pygame.image.load(url) 

@@ -2,15 +2,15 @@ import random
 from models.Avatar import Avatar
 
 class Poma(Avatar):
-    def __init__(self,x,y,w,h):
+    def __init__(self,x,y,w,h,tile):
         super().__init__(x,y,w,h)
-        self.puntuacio=random.randint(1, 10)
+        self.tile=tile
     
     def translate(self,x,y):
         pass
 
-    def pintar(self,panell):
-        print("pinta")     
+    def pintar(self,tauler):
+        print("pintar poma")     
 
     def __str__(self):
-        return f"Poma x:{self.x} y:{self.y} w:{self.w} h:{self.y}"
+        return f"Poma x:{self.x} y:{self.y} w:{self.w} h:{self.h}"

@@ -20,4 +20,4 @@ class Avatar(ABC):
         pass
 
     def __str__(self):
-        return f"Avatar {self.w}x{self.h} [{self.x},{self.y}]"
+        return f"Avatar {self.w}x{self.h} [{self.x},{self.h}]"
