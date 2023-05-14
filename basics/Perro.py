@@ -13,9 +13,6 @@ class Perro():
     def dormir(self):
         print("Perro Durmiendo")
 
-    def __str__(self):
-        return f"Perro: {self.xip}"
-
 #herència de la classe Perro
 class Chihuahua(Perro):
 
@@ -23,9 +20,8 @@ class Chihuahua(Perro):
     def ladrar(self):
         print("Chihuahua Ladrando")
 
-    #sobreescriure el mètode dormir de Perro    
-    def dormir(self):
-        print("Chihuahua Durmiendo")
+    def __str__(self):
+        return f"Chihuahua: {self.xip}"
 
 #herència de la classe Perro
 class Bulldog(Perro):
@@ -33,6 +29,10 @@ class Bulldog(Perro):
     #sobreescriure el mètode ladrar de Perro
     def ladrar(self):
         print("Bulldog Ladrando")
+
+    #sobreescriure el mètode dormir de Perro    
+    def dormir(self):
+        print("Bulldog Durmiendo")
 
     def __str__(self):
         return f"Bulldog: {self.xip}"

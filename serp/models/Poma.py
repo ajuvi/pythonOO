@@ -9,7 +9,7 @@ class Poma(Avatar):
     def translate(self,x,y):
         pass
 
-    def pintar(self,tauler):
+    def pintar(self,panell):
         print("pinta")     
 
     def __str__(self):

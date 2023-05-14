@@ -8,12 +8,8 @@ class Serp(Avatar):
     def translate(self,x,y):
         pass
 
-    def pintar(self,tauler):
+    def pintar(self,panell):
         pass     
 
     def __str__(self):
         return f"Serp x:{self.x} y:{self.y} w:{self.w} h:{self.y}"
-
-
-serp = Serp(0,0,10,10)
-print(serp)
