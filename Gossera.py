@@ -1,16 +1,16 @@
-from Perro import Perro, Bulldog, Chihuahua
+from Perro import *
 
 #main
 if __name__ == "__main__":
     
-    perrera = []
-    perrera.append(Perro(1))
-    perrera.append(Bulldog(2))
-    perrera.append(Bulldog(3))
-    perrera.append(Chihuahua(4))
-    perrera.append(Chihuahua(5))
+    gossera = []
+    gossera.append(Perro(1))
+    gossera.append(Bulldog(2))
+    gossera.append(Bulldog(3))
+    gossera.append(Chihuahua(4))
+    gossera.append(Chihuahua(5))
 
-    for p in perrera:
+    for p in gossera:
         p.ladrar();  
 
 

@@ -1,9 +1,9 @@
 #atributs i mètodes estàtics
 class Mates:
-    #atribut de classe
+    #atribut estàtic
     PI = 3.1416
 
-    #mètode de classe
+    #mètode estàtic
     @staticmethod
     def perimetre_cercle(radi):
         return 2*Mates.PI*radi

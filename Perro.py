@@ -46,7 +46,8 @@ if __name__ == "__main__":
     gos3 = Bulldog(40)
 
     #afegir el objectes en un array de Perro
-    gossos = [gos1,gos2,gos3]
+    gossos = [gos1,gos2]
+    gossos.append(gos3)
 
     #lladrar a tots els gossos
     for gos in gossos:
