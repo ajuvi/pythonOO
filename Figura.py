@@ -1,5 +1,5 @@
 from abc import ABC,abstractmethod
-import math
+from Mates import Mates
 
 #classe abtracte
 class Figura(ABC):
@@ -8,8 +8,21 @@ class Figura(ABC):
         self.x = x
         self.y = y
 
+    def moure(self, x, y):
+        self.x = x
+        self.y = y
+
     @abstractmethod
-    def pintar(self): pass
+    def area(self):
+        pass
+
+    @abstractmethod
+    def perimetre(self):
+        pass
+
+    @abstractmethod
+    def pintar(self):
+        pass
 
 #implementació de la interfície pintar
 class Rectangle(Figura):
@@ -19,6 +32,12 @@ class Rectangle(Figura):
         #atributs d'objecte
         self.alçada = alçada
         self.amplada = amplada
+
+    def area(self):
+        return self.amplada*self.alçada
+
+    def perimetre(self):
+        return (self.amplada+self.alçada)*2
 
     def pintar(self):
         print(self)
@@ -33,6 +52,12 @@ class Cercle(Figura):
         super().__init__(x, y)
         #atributs d'objecte
         self.radi = radi
+
+    def area(self):
+        return Mates.PI*self.radi**2
+
+    def perimetre(self):
+        return 2*Mates.PI*self.radi
 
     def pintar(self):
         print(self)
